@@ -10,6 +10,7 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "lint": "eslint src --ext .ts,.tsx --max-warnings=0",
+    "lintfix": "eslint src --ext .ts,.tsx --max-warnings=0 --fix",
     "typecheck": "tsc --project tsconfig.json --noEmit"
   },
   "dependencies": {
