@@ -16,6 +16,7 @@ module.exports = {
 	parserOptions: {
 		project: './tsconfig.json',
 	},
+	ignorePatterns: ['vite.config.ts'],
 	plugins: ['react', 'react-hooks', '@typescript-eslint'],
 	rules: {
 		'react-hooks/rules-of-hooks': 'error',
