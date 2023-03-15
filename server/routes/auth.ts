@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { UserModel } from "../models/User";
 
-// register
 export const authRouter = Router()
 authRouter.post('/login',async(req,res)=>{
   try{
@@ -10,7 +9,7 @@ authRouter.post('/login',async(req,res)=>{
     if(req.body.password !== user.password)return res.status(500).json('Incorrect Password ')
     return res.status(200).json(user)
   }catch(err){
-    console.error(err)
+    return res.status(401).json('User not found')
   }
 })
 authRouter.post("/register", async (req, res) => {

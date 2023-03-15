@@ -35,10 +35,21 @@ postsRouter.get("/:postId", async (req, res) => {
     return res.status(403).json(error);
   }
 });
-
-postsRouter.get("/timeline/all", async (req, res) => {
+// プロフィール用のタイムライン
+postsRouter.get("/profile/:username", async (req, res) => {
   try {
-    const me = await UserModel.findById(req.body.userId);
+    const me = await UserModel.findOne({ username: req.params.username })
+    const myPosts = await PostModel.find({ userId: me._id });
+    return res.status(200).json(myPosts)
+  } catch (error) {
+    console.error(error)
+    console.error('Failed to get timeline')
+    return res.status(500).json(error.message)
+  }
+});
+postsRouter.get("/timeline/:userId", async (req, res) => {
+  try {
+    const me = await UserModel.findById(req.params.userId);
     const myPosts = await PostModel.find({ userId: me._id });
     const friendsPosts = await Promise.all(
       me.followings.map((friendId) => {
@@ -47,7 +58,9 @@ postsRouter.get("/timeline/all", async (req, res) => {
     );
     return res.status(200).json(myPosts.concat(...friendsPosts))
   } catch (error) {
-    return res.status(500).json(error);
+    console.error(error)
+    console.error('Failed to get timeline')
+    return res.status(500).json(error.message)
   }
 });
 postsRouter.put("/:postId/like", async (req, res) => {

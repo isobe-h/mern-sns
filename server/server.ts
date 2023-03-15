@@ -5,7 +5,7 @@ import { postsRouter } from "./routes/posts";
 import { userRouter } from "./routes/users";
 
 const app = express();
-const PORT = 3000;
+const PORT = 8000;
 
 require("dotenv").config();
 mongoose
@@ -22,8 +22,7 @@ app.use(express.json());
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/posts", postsRouter);
-app.get("/", (req, res) => {
-  res.send("Hello Express");
-});
-
+app.get('/', (req, res) => {
+	res.send('Hello Express')
+})
 app.listen(PORT, () => console.log("Listening Server"));
