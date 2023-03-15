@@ -1,0 +1,62 @@
+.sidebar {
+	flex: 2.5;
+}
+.sidebarFriendImg {
+	width: 40px;
+	height: 40px;
+	object-fit: cover;
+	border-radius: 50%;
+	margin-right: 10px;
+}
+.sidebarWrapper {
+	padding: 20px;
+	margin-bottom: 50px;
+	position: sticky;
+	position: -webkit-sticky;
+	top: 50px;
+}
+.sidebarListItem:hover {
+	box-shadow: none;
+	transform: translateY(3px);
+	transition: all 0.3s;
+	background-color: #f5f5f5;
+}
+.sidebarListItem {
+	align-items: center;
+	cursor: pointer;
+	padding: 4px 6px;
+	display: flex;
+	position: relative;
+}
+.sidebarList {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.sidebarIcon {
+	font-size: 1.2em;
+	margin-right: 10px;
+}
+.sidebarListItemText {
+	font-size: 0.9rem;
+}
+.recommendUsers {
+	margin: 20px 0;
+}
+.sidebarFriendList {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.sidebarFriend {
+	display: flex;
+	margin-bottom: 15px;
+	align-items: center;
+  cursor: pointer;
+}
+.sidebarFriend:hover {
+	box-shadow: none;
+	transform: translateY(3px);
+	transition: all 0.3s;
+	background-color: #f5f5f5;
+}

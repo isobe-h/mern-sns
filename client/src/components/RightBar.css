@@ -1,0 +1,164 @@
+.rightBar {
+	flex: 2.5;
+}
+
+.rightBarWrapper {
+	padding: 20px 20px 0 0;
+ 	margin-bottom: 50px;
+	position: sticky;
+	position: -webkit-sticky;
+	top: 50px;
+}
+.birthdayContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+.rightBarTitle{
+	font-size: 18px;
+	font-weight: 500;
+	margin-bottom: 10px;
+}
+.birthdayImg {
+	width: 40px;
+	height: 40px;
+	margin-right: 5px;
+}
+
+.birthdayText {
+	font-weight: 300;
+	font-size: 15px;
+}
+
+.rightBarAd {
+	width: 100%;
+	border-radius: 10px;
+	margin: 25px 0;
+}
+
+.rightBarTitle {
+	margin-bottom: 20px;
+}
+
+.rightBarFriendList {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.eventContainer {
+	display: flex;
+	align-items: center;
+}
+.rightBarFriend {
+	display: flex;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+.rightBarProfileImgContainer {
+	margin-right: 10px;
+	position: relative;
+}
+
+.rightBarProfileImg {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.rightBarOnline {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background-color: #a55ac8;
+	position: absolute;
+	top: -2px;
+	left: 0;
+	border: 2px solid white;
+}
+
+.rightBarUsername {
+	font-weight: 500;
+}
+
+.rightBarTitle {
+	font-size: 18px;
+	font-weight: 500;
+	margin-bottom: 10px;
+}
+
+.rightBarInfo {
+	margin-bottom: 30px;
+}
+
+.rightBarInfoItem {
+	margin-bottom: 10px;
+}
+
+.rightBarInfoKey {
+	font-weight: 500;
+	margin-right: 5px;
+	color: #555;
+}
+
+.rightBarFollowings {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.rightBarFollowing {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+	cursor: pointer;
+}
+
+.rightBarFollowingImg {
+	width: 100px;
+	height: 100px;
+	border-radius: 5px;
+	object-fit: cover;
+}
+
+.promotionTitle {
+	font-weight: 550;
+	margin-bottom: -10px;
+	margin-top: 20px;
+}
+
+.rightBarPromotionImg {
+	width: 85%;
+	border-radius: 10px;
+	margin: 25px 0;
+}
+.starImg {
+	width: 40px;
+	height: 40px;
+	margin-right: 5px;
+}
+.adImg {
+	width: 100%;
+}
+.promotionName {
+	font-size: small;
+	color: #444040;
+	margin-top: -20px;
+}
+
+.rightBarFollowButton {
+	/* margin-top: 30px; */
+	margin-bottom: 10px;
+	border: none;
+	background-color: #347cbb;
+	color: white;
+	border-radius: 5px;
+	padding: 7px 10px;
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+}
