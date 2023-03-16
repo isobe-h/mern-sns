@@ -12,11 +12,11 @@ import { userAtom } from './state/loginUser'
 const queryClient = new QueryClient()
 
 const App: FC = () => {
-	const user = useAtom(userAtom)
+	const [user] = useAtom(userAtom)
 	const router = createBrowserRouter([
 		{
 			path: '/',
-			element: user.username ? <Home /> : <Login />,
+			element: user?.username ? <Home /> : <Login />,
 		},
 		{
 			path: '/register',
@@ -25,11 +25,11 @@ const App: FC = () => {
 		},
 		{
 			path: '/login',
-			element: user.username ? <Navigate to="/" /> : <Login />,
+			element: user?.username ? <Navigate to="/" /> : <Login />,
 		},
 		{
 			path: '/profile/:username',
-			element: user.username ? <Profile /> : <Login />,
+			element: user?.username ? <Profile /> : <Login />,
 		},
 	])
 	return (

@@ -5,7 +5,7 @@ import { userAtom } from '../state/loginUser'
 import './TopBar.css'
 
 const TopBar: React.FC = () => {
-	const user = useAtom(userAtom)
+	const [user] = useAtom(userAtom)
 	return (
 		<div className="topBarContainer">
 			<div className="topBarLeft">
