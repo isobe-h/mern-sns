@@ -1,8 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
+import path from "path";
 import { authRouter } from "./routes/auth";
 import { postsRouter } from "./routes/posts";
 import { userRouter } from "./routes/users";
+import helmet from "helmet";
 
 const app = express();
 const PORT = 8000;
@@ -18,7 +20,10 @@ mongoose
   });
 
 // Middleware
+app.use(helmet());
 app.use(express.json());
+app.use("/assets", express.static(path.join(__dirname, "assets")))
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/posts", postsRouter);
