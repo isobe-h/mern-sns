@@ -8,9 +8,22 @@ export default defineConfig({
 		cors: false,
 		proxy: {
 			'/api': {
-				target: 'http://localhost:8000/api',
+				target: 'http://localhost:8000',
 				changeOrigin: true,
-				rewrite: (path) => path.replace(/^\/api/, ''),
+				secure: false,
+				ws: true,
+			},
+			'/assets': {
+				target: 'http://localhost:8000',
+				changeOrigin: true,
+				secure: false,
+				ws: true,
+			},
+			'/uploads': {
+				target: 'http://localhost:8000',
+				changeOrigin: true,
+				secure: false,
+				ws: true,
 			},
 		},
 	},
