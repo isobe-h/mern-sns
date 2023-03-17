@@ -10,7 +10,7 @@ const Home: FC = () => {
 		<div>
 			<TopBar />
 			<div className="homeContainer">
-				<SideBar username='isoiso'/>
+				<SideBar />
 				<Timeline />
 				<RightBar />
 			</div>
