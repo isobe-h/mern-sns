@@ -39,3 +39,21 @@
     width: 100%;
     margin-top: 20px;
 }
+.profileFollowButton{
+    border: none;
+    padding: 6px 10px;
+    background: #2c517c;
+    border-radius: 5px;
+    margin-right: 10px;
+    color: white;
+    cursor: pointer;
+}
+.profileUnfollowButton{
+    border: none;
+    padding: 6px 10px;
+    background: white;
+    border-radius: 5px;
+    margin-right: 10px;
+    color: #2c517c;;
+    cursor: pointer;
+}

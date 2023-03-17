@@ -58,15 +58,15 @@
     align-items: center;
 }
 .likeIcon{
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
+    width: 1.2rem;
+    height: 1.2rem;
     cursor: pointer;
 }
 .postLikeCounter{
-    font-size: 15px;
+    font-size: 0.9rem;
 }
 .postCommentText{
     border-bottom: 1px solid gray;
     cursor: pointer;
+    font-size: 0.9rem;
 }
