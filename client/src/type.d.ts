@@ -8,6 +8,7 @@ export type UserType = {
 	isAdmin: boolean
 	desc: string
 	city: string
+	_id?: string
 }
 
 export type PostType = {
@@ -16,6 +17,7 @@ export type PostType = {
 	desc: string
 	img: string
 	likes: Array<string>
-	comment: string
+	comment: Array<string>
 	createdAt: string
+	_id?: string
 }
