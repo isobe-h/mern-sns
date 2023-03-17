@@ -2,8 +2,13 @@ import { useRef, useState } from 'react'
 import './Register.css'
 import { useNavigate } from 'react-router-dom'
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
+import { useAtom } from 'jotai'
+import { RESET } from 'jotai/utils'
+import { authAtom } from '../state/auth'
+import { UserType } from '../type'
 
 const Register: React.FC = () => {
+	const [, setAuth] = useAtom(authAtom)
 	const [inputType, setInputType] = useState<'password' | 'text'>('password')
 	const onClick = () => {
 		if (inputType === 'password') setInputType('text')
@@ -12,26 +17,36 @@ const Register: React.FC = () => {
 	const email = useRef<HTMLInputElement>(null)
 	const password = useRef<HTMLInputElement>(null)
 	const username = useRef<HTMLInputElement>(null)
-	const navigater = useNavigate()
+	const navigator = useNavigate()
 	const handleRegister = async (e) => {
 		e.preventDefault()
+		setAuth(RESET)
 		const emailValue = email.current?.value
 		const passwordValue = password.current?.value
 		const usernameValue = username.current?.value
 		if (emailValue && passwordValue && usernameValue) {
+			const newUser: UserType = {
+				email: emailValue,
+				password: passwordValue,
+				username: usernameValue,
+				profilePicture: '',
+				followers: [],
+				followings: [],
+				isAdmin: false,
+				desc: '',
+				city: '',
+			}
 			const res = await fetch(`api/auth/register`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({
-					email: emailValue,
-					password: passwordValue,
-					username: usernameValue,
-				}),
+				body: JSON.stringify(newUser),
 			})
-			if (res.status === 200) navigater('/login')
-			else alert(res.statusText)
+			if (res.status === 200) {
+				navigator('/login')
+				window.location.reload()
+			} else alert(res.statusText)
 		}
 	}
 
