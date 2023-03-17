@@ -1,29 +1,93 @@
+/* eslint-disable no-underscore-dangle */
+import { useAtom } from 'jotai'
+import { useRef, useState } from 'react'
 import { MdAnalytics, MdFace, MdGif, MdImage } from 'react-icons/md'
+import { authAtom } from '../state/auth'
 import './Share.css'
 
 const Share: React.FC = () => {
+	const [user] = useAtom(authAtom)
+	const [attachment, setAttachment] = useState<File | null>(null)
+	const inputText = useRef<HTMLInputElement>(null)
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		const text = inputText.current?.value
+		if (text && user?._id) {
+			const newPost = {
+				userId: user?._id,
+				desc: text,
+				img: '',
+				likes: [],
+				comment: [],
+			}
+			if (attachment) {
+				const data = new FormData()
+				// attachment.nameにディレクトリ名が含まれて入れば削除する
+				const newName = attachment.name.replace(/^.*[\\/]/, '')
+				const fileName = `${Date.now()}_${newName}`
+				data.append('name', fileName)
+				data.append('file', attachment)
+				newPost.img = fileName
+				try {
+					await fetch('/api/posts/upload', {
+						method: 'POST',
+						body: data,
+					})
+				} catch (err) {
+					console.log(err)
+				}
+			}
+			const res = await fetch('/api/posts', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(newPost),
+			})
+			if (res.status === 201) {
+				window.location.reload()
+			} else alert(res.statusText)
+		}
+	}
 	return (
 		<div className="share">
 			<div className="shareWrapper">
 				<div className="shareTop">
 					<img
-						src="/assets/person/noAvatar.png"
+						src={user?.profilePicture || '/assets/person/noAvatar.png'}
 						alt="share"
 						className="shareProfileImg"
 					/>
 					<input
 						type="text"
 						className="shareInput"
-						placeholder="What are you doing?"
+						placeholder="いまなにしてる？"
+						ref={inputText}
 					/>
+					{attachment && (
+						<span
+							style={{
+								fontSize: '0.5rem',
+							}}
+						>
+							{attachment.name}
+						</span>
+					)}
 				</div>
 				<hr className="shareHr" />
-				<div className="shareButtons">
+				<form className="shareButtons" onSubmit={handleSubmit}>
 					<div className="shareOptions">
-						<div className="shareOption">
+						<label className="shareOption" htmlFor="file">
 							<MdImage className="shareIcon" color="blue" />
 							<span className="shareText">写真</span>
-						</div>
+							<input
+								type="file"
+								id="file"
+								accept="image/png, image/jpeg"
+								style={{ display: 'none' }}
+								onChange={(e) =>
+									e.target.files && setAttachment(e.target.files[0])
+								}
+							/>
+						</label>
 					</div>
 					<div className="shareOptions">
 						<div className="shareOption">
@@ -46,7 +110,7 @@ const Share: React.FC = () => {
 					<button type="submit" className="shareButton">
 						投稿
 					</button>
-				</div>
+				</form>
 			</div>
 		</div>
 	)
