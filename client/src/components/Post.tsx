@@ -7,7 +7,9 @@ import { FiMoreVertical } from 'react-icons/fi'
 
 import './Post.css'
 import { Link } from 'react-router-dom'
+import { useAtom } from 'jotai'
 import { PostType } from '../type'
+import { authAtom } from '../state/auth'
 
 const formatter = buildFormatter(jaStrings)
 
@@ -16,12 +18,9 @@ type Props = {
 }
 
 const Post: React.FC<Props> = ({ post }) => {
-	const [like, setLike] = useState(post.like)
-	const [isLiked, setIsLiked] = useState(false)
-	const handleGood = () => {
-		setLike(isLiked ? like - 1 : like + 1)
-		setIsLiked(!isLiked)
-	}
+	const [like, setLike] = useState(post.likes)
+	const [user] = useAtom(authAtom)
+	const [isLiked, setIsLiked] = useState(post.likes.includes(user?._id))
 	const getUser = async () => {
 		const res = await fetch(`/api/users?userId=${post.userId}`)
 		return res.json()
@@ -32,6 +31,19 @@ const Post: React.FC<Props> = ({ post }) => {
 	}
 	if (status === 'error') {
 		return <span>Error: {error.message}</span>
+	}
+	const handleGood = async () => {
+		try {
+			await fetch(`/api/posts/${post._id}/like`, {
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ userId: user._id }),
+			})
+		} catch (error) {
+			console.log(error)
+		}
+		setIsLiked(!isLiked)
+		setLike(isLiked ? like - 1 : like + 1)
 	}
 	return (
 		<div className="post">
@@ -56,7 +68,7 @@ const Post: React.FC<Props> = ({ post }) => {
 				</div>
 				<div className="postCenter">
 					<span className="postText">{post.desc}</span>
-					<img src={post.img} className="postImg" alt="" />
+					<img src={`/uploads/${post.img}`} className="postImg" alt="" />
 				</div>
 				<div className="postBottom">
 					<div className="postBottomLeft">
@@ -72,11 +84,13 @@ const Post: React.FC<Props> = ({ post }) => {
 							)}
 						</button>
 						<span className="postLikeCounter">
-							{post.likes.length}人がいいね
+							{post.likes.length + isLiked}人がいいね
 						</span>
 					</div>
 					<div className="postBottomRight">
-						<span className="postCommentText">{post.comment}人のコメント</span>
+						<span className="postCommentText">
+							{post.comment.length}人のコメント
+						</span>
 					</div>
 				</div>
 			</div>
