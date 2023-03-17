@@ -7,12 +7,12 @@ import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
-import { userAtom } from './state/loginUser'
+import { authAtom } from './state/auth'
 
 const queryClient = new QueryClient()
 
 const App: FC = () => {
-	const [user] = useAtom(userAtom)
+	const [user] = useAtom(authAtom)
 	const router = createBrowserRouter([
 		{
 			path: '/',

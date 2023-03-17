@@ -8,7 +8,7 @@ import { authAtom } from '../state/auth'
 import { UserType } from '../type'
 
 const Register: React.FC = () => {
-	const [, setAuth] = useAtom(authAtom)
+	const [, setUser] = useAtom(authAtom)
 	const [inputType, setInputType] = useState<'password' | 'text'>('password')
 	const onClick = () => {
 		if (inputType === 'password') setInputType('text')
@@ -20,7 +20,7 @@ const Register: React.FC = () => {
 	const navigator = useNavigate()
 	const handleRegister = async (e) => {
 		e.preventDefault()
-		setAuth(RESET)
+		setUser(RESET)
 		const emailValue = email.current?.value
 		const passwordValue = password.current?.value
 		const usernameValue = username.current?.value

@@ -1,15 +1,15 @@
-import { useAtom } from 'jotai'
+import { useSetAtom } from 'jotai'
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 
 import { useRef, useState } from 'react'
 import './Login.css'
 import { useNavigate } from 'react-router-dom'
-import { userAtom } from '../state/loginUser'
+import { authAtom } from '../state/auth'
 
 const Login: React.FC = () => {
 	const [inputType, setInputType] = useState<'password' | 'text'>('password')
 	const navigator = useNavigate()
-	const [, setUser] = useAtom(userAtom)
+	const setUser = useSetAtom(authAtom)
 	const onClick = () => {
 		if (inputType === 'password') setInputType('text')
 		else setInputType('password')

@@ -1,11 +1,11 @@
 import { useAtom } from 'jotai'
 import { MdSearch, MdChat, MdNotifications } from 'react-icons/md'
 import { Link } from 'react-router-dom'
-import { userAtom } from '../state/loginUser'
+import { authAtom } from '../state/auth'
 import './TopBar.css'
 
 const TopBar: React.FC = () => {
-	const [user] = useAtom(userAtom)
+	const [user] = useAtom(authAtom)
 	return (
 		<div className="topBarContainer">
 			<div className="topBarLeft">
